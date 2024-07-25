@@ -10,7 +10,6 @@ export default function UsersTable() {
 
   if (isLoading) return <Spinner />;
   if (!users || error) return <Empty resource="users" />;
-  console.log(users);
   return (
     <Menus>
       <Table columns="0.6fr 2fr 2fr 2fr 1fr">

@@ -56,7 +56,7 @@ export default function UserRow({ user }) {
 
   return (
     <Table.Row>
-      <Img src={userPhoto || `../../../public/default-user.jpg`} />
+      <Img src={userPhoto || `/default-user.jpg`} />
       <Email>{email}</Email>
       <UserName>{userName}</UserName>
       <Time>{formattedDate}</Time>

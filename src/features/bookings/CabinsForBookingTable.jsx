@@ -5,10 +5,14 @@ import AvilableCabinRow from "./AvilableCabinRow";
 import { useAvilableCabins } from "./useAvilableCabins";
 
 export default function CabinsForBookingTable() {
-  const { avilableCabins, loadingAvilableCabins } = useAvilableCabins();
+  // Ensure avilableCabins is always an array
+  const { avilableCabins = [], loadingAvilableCabins } = useAvilableCabins();
+
+  // Show a spinner while loading
   if (loadingAvilableCabins) return <Spinner />;
 
-  const groupedCabins = avilableCabins?.reduce((acc, cabin) => {
+  // Group the cabins by capacity and price
+  const groupedCabins = avilableCabins.reduce((acc, cabin) => {
     const key = `${cabin.maxCapacity}-${cabin.regularPrice}`;
 
     if (!acc[key]) {
@@ -21,6 +25,7 @@ export default function CabinsForBookingTable() {
     return acc;
   }, {});
 
+  // Convert groupedCabins to an array
   const resultArray = Object.values(groupedCabins);
 
   return (
@@ -39,6 +44,7 @@ export default function CabinsForBookingTable() {
             <AvilableCabinRow cabin={cabin} key={cabin.price} />
           )}
         >
+          {/* Optionally show a spinner in Table.Body, though it's not typical */}
           {loadingAvilableCabins && <Spinner />}
         </Table.Body>
       ) : (
